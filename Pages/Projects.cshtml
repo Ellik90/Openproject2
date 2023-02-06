@@ -1,0 +1,16 @@
+@page
+@model ProjectsModel;
+@using System.Net.Http;
+@using System.Net;
+@{
+    ViewData["Title"] = "Project";
+    HttpClient client = new HttpClient();
+    var projects = await client.GetFromJsonAsync<List<OpenProjectItem>>("https://apiproject.azurewebsites.net/api/projects");
+}
+@* <div class="text-center">
+    <h1 class="display-5">@projects</h1>
+</div> *@
+
+@foreach (var project in projects) {
+<div>@project.Name</div>
+}
